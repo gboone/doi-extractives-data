@@ -52,7 +52,14 @@ var params = {
   method:       'GetData',
   DataSetName:  null,
   Industry:     options.industry,
-  Year:         years.join(',')
+  Year:         years.join(','),
+  // see _input/bea/tables.json for possible values:
+  // 1 = "Value Added by Industry (A) (Q)"
+  // 5 = "Value Added by Industry as a Percentage of Gross Domestic Product (A) (Q)"
+  // 10 = "Real Value Added by Industry (A) (Q)"
+  TableID:      1,
+  // A = Annual, Q = Quarterly
+  Frequency:    'A'
 };
 
 switch (options.geo) {
@@ -70,11 +77,6 @@ switch (options.geo) {
     break;
   default:
     params.DataSetName = 'GDPbyIndustry';
-    // see input/bea/tables.json for possible values:
-    // 5 = "Value Added by Industry as a Percentage of Gross Domestic Product (A) (Q)"
-    params.TableID = 5;
-    // A = Annual, Q = Quarterly
-    params.Frequency = 'A';
 }
 
 var url = [
